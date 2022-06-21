@@ -10,7 +10,9 @@ function App() {
   return (
     <div className='main'>
         <Navbar />
-        {/* {cards} */}
+        <section className='card-container'>
+          {cards}
+        </section>
     </div>
   );
 }
