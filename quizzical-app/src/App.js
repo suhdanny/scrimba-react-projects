@@ -10,8 +10,11 @@ function App() {
     const [allQuestions, setAllQuestions] = React.useState([]);
     const [questions, setQuestions] = React.useState([]);
 
-    function startGame() {
-        setQuizStart(true);
+    function toggleStart() {
+        setQuizStart(prev => !prev);
+        if (quizEnd) {
+            setQuizEnd(false);
+        }
     }
 
     React.useEffect(() => {
@@ -21,7 +24,7 @@ function App() {
             setAllQuestions(data.results);
         }
         getQuestions();
-    }, [])
+    }, [quizStart])
 
     React.useEffect(() => {
         function allNewQuestion() {
@@ -140,7 +143,7 @@ function App() {
                     <div className='start-quiz'>
                         <h1 className='quiz-title'>Quizzical</h1>
                         <p className='quiz-description'>Press the button below to start the quiz!</p>
-                        <button className='quiz-start' onClick={startGame}>Start Quiz</button>
+                        <button className='quiz-start' onClick={toggleStart}>Start Quiz</button>
                     </div>
                 </div>
                 :
@@ -153,7 +156,7 @@ function App() {
                         ?
                         <div className='quiz-result'>
                             <h2 className='result-stats'>You scored {checkResults()}/{questions.length} correct answers</h2>
-                            <button className='play-again btn'>Play Again</button>
+                            <button className='play-again btn' onClick={toggleStart}>Play Again</button>
                         </div>
                         :
                         <button className='answer-check btn' onClick={checkAnswer}>Check Answers</button>
