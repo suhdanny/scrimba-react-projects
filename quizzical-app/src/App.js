@@ -24,16 +24,16 @@ function App() {
 
     React.useEffect(() => {
         function allNewQuestion() {
-            const newQuestion = [];
+            let newQuestion = [];
             for (let i = 0; i < allQuestions.length; i++) {
                 newQuestion.push(generateNewQuestion(allQuestions[i]));
             }
-            shuffle(newQuestion);
             return newQuestion;
         }
 
         function generateNewQuestion(question) {
             return {
+                showAnswer: false,
                 options: generateOption(question),
                 correct: question.correct_answer,
                 question: question.question
@@ -46,6 +46,7 @@ function App() {
                 options.push({
                     value: question.incorrect_answers[i],
                     isClicked: false,
+                    isAnswer: false,
                     id: nanoid()
                 })
             }
@@ -53,8 +54,11 @@ function App() {
             options.push({
                 value: question.correct_answer,
                 isClicked: false,
+                isAnswer: true,
                 id: nanoid()
             })
+
+            shuffle(options);
 
             return options;
         }
@@ -88,6 +92,17 @@ function App() {
                 return {...oldQuestion, options: options};
             })
         ))
+        console.log(questions)
+    }
+
+    function checkAnswer() {
+
+
+
+        // !showAnswer --> isClicked background of blue
+        // showAnswer --> then the following
+        // if isAnswer && isClicked --> background of green
+        // if isAnswer && !isClicked --> background of red
     }
 
     const questionElements = questions.map((question, index) => {
@@ -116,8 +131,10 @@ function App() {
                 </div>
                 :
                 <div className='main--quiz'>
+                    <img src='images/main-blue.png' className='blue-blob' alt='blob'/>
+                    <img src='images/main-yellow.png' className='yellow-blob' alt='blob'/>
                     {questionElements}
-                    <button className='answer-check'>Check Answers</button>
+                    <button className='answer-check' onClick={checkAnswer}>Check Answers</button>
                 </div>
             }
         </main>
