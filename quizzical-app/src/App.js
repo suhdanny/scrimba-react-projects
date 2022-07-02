@@ -5,8 +5,13 @@ import {nanoid} from "nanoid"
 
 function App() {
 
+    const [quizStart, setQuizStart] = React.useState(false);
     const [allQuestions, setAllQuestions] = React.useState([]);
     const [questions, setQuestions] = React.useState([]);
+
+    function startGame() {
+        setQuizStart(true);
+    }
 
     React.useEffect(() => {
         async function getQuestions() {
@@ -84,7 +89,7 @@ function App() {
             })
         ))
     }
-    
+
     const questionElements = questions.map((question, index) => {
         return <Question
                 key={index} 
@@ -97,15 +102,24 @@ function App() {
 
     return (
         <main>
-            {/* <img src='images/blue-blob.png' className='blue-blob' alt='blob'/>
-            <img src='images/yellow-blob.png' className='yellow-blob' alt='blob'/>
-            <div className='start-quiz'>
-                <h1 className='quiz-title'>Quizzical</h1>
-                <p className='quiz-description'>Press the button below to start the quiz!</p>
-                <button className='quiz-start'>Start Quiz</button>
-            </div> */}
-            {questionElements}
-            <button className='answer-check'>Check Answers</button>
+            {
+                !quizStart
+                ?
+                <div className='main--start'>
+                    <img src='images/blue-blob.png' className='blue-blob' alt='blob'/>
+                    <img src='images/yellow-blob.png' className='yellow-blob' alt='blob'/>
+                    <div className='start-quiz'>
+                        <h1 className='quiz-title'>Quizzical</h1>
+                        <p className='quiz-description'>Press the button below to start the quiz!</p>
+                        <button className='quiz-start' onClick={startGame}>Start Quiz</button>
+                    </div>
+                </div>
+                :
+                <div className='main--quiz'>
+                    {questionElements}
+                    <button className='answer-check'>Check Answers</button>
+                </div>
+            }
         </main>
     )
 }

@@ -18,13 +18,18 @@ body {
 main {
     width: 550px;
     height: 550px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    /* justify-content: center; */
     background-color: #F5F7FB;
     position: relative;
-    padding: 40px 75px;
+    /* padding: 40px 75px; */
+}
+
+.main--start {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .blue-blob {
@@ -43,6 +48,16 @@ main {
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+
+.main--quiz {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    padding: 30px 70px;
 }
 
 .quiz-title {
@@ -83,7 +98,6 @@ main {
     display: flex;
     flex-direction: column;
     gap: 12px;
-    margin-bottom: 15px;
 }
 
 .card-title {
@@ -110,10 +124,12 @@ hr {
     border: 0.794239px solid #DBDEF0;
     transform: rotate(-0.05deg);
     width: 400px;
+    margin-top: 10px;
 }
 
 .answer-check {
     padding: 10px 20px;
+    width: 120px;
     background-color: #4D5B9E;
     border: none;
     border-radius: 10px;
