@@ -23,6 +23,7 @@ function App() {
             for (let i = 0; i < allQuestions.length; i++) {
                 newQuestion.push(generateNewQuestion(allQuestions[i]));
             }
+            shuffle(newQuestion);
             return newQuestion;
         }
 
@@ -53,6 +54,13 @@ function App() {
             return options;
         }
 
+        function shuffle(arr) {
+            for (let i = arr.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [arr[i], arr[j]] = [arr[j], arr[i]];
+            }
+        }
+
         setQuestions(allNewQuestion());
 
     }, [allQuestions])
@@ -76,7 +84,7 @@ function App() {
             })
         ))
     }
-
+    
     const questionElements = questions.map((question, index) => {
         return <Question
                 key={index} 
