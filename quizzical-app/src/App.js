@@ -99,6 +99,24 @@ function App() {
             return {...oldQuestion, showAnswer: true}
         }))
         setQuizEnd(true);
+        
+        console.log(questions)
+    }
+
+    function checkResults() {
+        let count = 0;
+
+        for (let i = 0; i < questions.length; i++) {
+            const question = questions[i];
+            for (let j = 0; j < question.options.length; j++) {
+                const option = question.options[j];
+                if (option.isClicked && option.isAnswer) {
+                    count = count + 1;
+                }
+            }
+        }
+
+        return count;
     }
 
     const questionElements = questions.map((question, index) => {
@@ -134,7 +152,7 @@ function App() {
                         quizEnd
                         ?
                         <div className='quiz-result'>
-                            <h2 className='result-stats'>You scored 3/5 correct answers</h2>
+                            <h2 className='result-stats'>You scored {checkResults()}/{questions.length} correct answers</h2>
                             <button className='play-again btn'>Play Again</button>
                         </div>
                         :
