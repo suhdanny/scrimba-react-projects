@@ -35,7 +35,6 @@ function App() {
             return {
                 showAnswer: false,
                 options: generateOption(question),
-                correct: question.correct_answer,
                 question: question.question
             }
         }    
@@ -92,17 +91,14 @@ function App() {
                 return {...oldQuestion, options: options};
             })
         ))
-        console.log(questions)
     }
 
     function checkAnswer() {
+        setQuestions(prevQuestion => prevQuestion.map(oldQuestion => {
+            return {...oldQuestion, showAnswer: true}
+        }))
 
-
-
-        // !showAnswer --> isClicked background of blue
-        // showAnswer --> then the following
-        // if isAnswer && isClicked --> background of green
-        // if isAnswer && !isClicked --> background of red
+        console.log(questions)
     }
 
     const questionElements = questions.map((question, index) => {
@@ -110,8 +106,8 @@ function App() {
                 key={index} 
                 question={question.question} 
                 options={question.options} 
-                correct={question.correct}
                 handleClick={handleClick}
+                showAnswer={question.showAnswer}
                 />
     })
 
