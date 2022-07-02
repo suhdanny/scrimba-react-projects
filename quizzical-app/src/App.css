@@ -131,7 +131,7 @@ hr {
     margin-top: 10px;
 }
 
-.answer-check {
+.btn {
     padding: 10px 20px;
     width: 120px;
     background-color: #4D5B9E;
@@ -141,4 +141,16 @@ hr {
     font-weight: 600;
     font-size: 10px;
     cursor: pointer;
+}
+
+.quiz-result {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.result-stats {
+    font-weight: 700;
+    font-size: 12.8px;
+    color: #293264;
 }

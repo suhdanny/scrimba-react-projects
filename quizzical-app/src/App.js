@@ -6,6 +6,7 @@ import {nanoid} from "nanoid"
 function App() {
 
     const [quizStart, setQuizStart] = React.useState(false);
+    const [quizEnd, setQuizEnd] = React.useState(false);
     const [allQuestions, setAllQuestions] = React.useState([]);
     const [questions, setQuestions] = React.useState([]);
 
@@ -97,8 +98,7 @@ function App() {
         setQuestions(prevQuestion => prevQuestion.map(oldQuestion => {
             return {...oldQuestion, showAnswer: true}
         }))
-
-        console.log(questions)
+        setQuizEnd(true);
     }
 
     const questionElements = questions.map((question, index) => {
@@ -130,7 +130,16 @@ function App() {
                     <img src='images/main-blue.png' className='blue-blob' alt='blob'/>
                     <img src='images/main-yellow.png' className='yellow-blob' alt='blob'/>
                     {questionElements}
-                    <button className='answer-check' onClick={checkAnswer}>Check Answers</button>
+                    {
+                        quizEnd
+                        ?
+                        <div className='quiz-result'>
+                            <h2 className='result-stats'>You scored 3/5 correct answers</h2>
+                            <button className='play-again btn'>Play Again</button>
+                        </div>
+                        :
+                        <button className='answer-check btn' onClick={checkAnswer}>Check Answers</button>
+                    }
                 </div>
             }
         </main>
