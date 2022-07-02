@@ -1,4 +1,5 @@
-import React from 'react'
+import React from 'react';
+import he from 'he';
 
 export default function Question(props) {
 
@@ -25,7 +26,7 @@ export default function Question(props) {
                     style={styles} 
                     onClick={() => props.handleClick(option.id)}
                     >
-                        {option.value}
+                        {he.decode(option.value)}
                     </div>
         })
         return options;
@@ -34,7 +35,7 @@ export default function Question(props) {
     return (
         <div className='question-card'>
             <h1 className='card-title'>
-                {props.question}
+                {he.decode(props.question)}
             </h1>
             <div className='card-options'>
                 {createOptionElements()}

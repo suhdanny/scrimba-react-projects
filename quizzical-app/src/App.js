@@ -2,6 +2,7 @@ import React from 'react'
 import './App.css';
 import Question from './components/Question'
 import {nanoid} from "nanoid"
+import Confetti from 'react-confetti'
 
 function App() {
 
@@ -19,7 +20,7 @@ function App() {
 
     React.useEffect(() => {
         async function getQuestions() {
-            const response = await fetch("https://opentdb.com/api.php?amount=4&category=11&difficulty=medium&type=multiple");
+            const response = await fetch("https://opentdb.com/api.php?amount=4&category=11&difficulty=easy&type=multiple");
             const data = await response.json();
             setAllQuestions(data.results);
         }
@@ -102,8 +103,6 @@ function App() {
             return {...oldQuestion, showAnswer: true}
         }))
         setQuizEnd(true);
-        
-        console.log(questions)
     }
 
     function checkResults() {
@@ -155,6 +154,7 @@ function App() {
                         quizEnd
                         ?
                         <div className='quiz-result'>
+                            {checkResults() === questions.length && <Confetti />}
                             <h2 className='result-stats'>You scored {checkResults()}/{questions.length} correct answers</h2>
                             <button className='play-again btn' onClick={toggleStart}>Play Again</button>
                         </div>
